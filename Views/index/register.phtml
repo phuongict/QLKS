@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi" >
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng Ký</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="<?php echo template_url; ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo template_url; ?>css/login.css">
+    <style>
+        .form-module{
+            max-width: 520px;
+        }
+        .form-module input[type="radio"]{
+            width: auto;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="pen-title">
+    <h1>Đăng Ký</h1>
+    <?php
+    unset($_SESSION['userLogin']);
+    if(isset($this->view['msg'])){echo $this->view['msg'];}
+            if(@$this->view['flag'] === true){
+                echo "<script type='text/javascript'>
+                            function Redirect() {
+                               window.location='?controller=index&action=login';
+                            }
+                            setTimeout('Redirect()', 3000);
+                    </script>";
+            }
+    ?>
+</div>
+<!-- Form Module-->
+<div class="module form-module">
+    <div class="form">
+        <h2>Tạo tài khoản</h2>
+        <form method="post">
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" name="txt_tai_khoan" placeholder="Tên đăng nhập..."/>
+                    <input type="password" name="txt_mat_khau" placeholder="Mật khẩu..."/>
+                    <input type="email" name="txt_email" placeholder="Email..."/>
+                    <input type="tel" name="txt_dien_thoai" placeholder="Điện thoại..."/>
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" name="txt_ho_dem" placeholder="Họ đệm..."/>
+                    <input type="text" name="txt_ten" placeholder="Tên..."/>
+                    <input type="text" name="txt_dia_chi" placeholder="Địa chỉ..."/>
+                   <lable>Giới tính: </lable><input type="radio" name="txt_gt" value="0"/> Nữ <input type="radio" name="txt_gt" value="1"/> Nam
+                </div>
+            </div>
+            <button name="btnSave">Đăng ký</button>
+        </form>
+    </div>
+    <div class="cta"><a href="#">Đăng ký</a> | <a href="#">Quên mật khẩu?</a></div>
+</div>
+</body>
+
+</html>

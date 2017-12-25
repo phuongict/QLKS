@@ -1,0 +1,53 @@
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Thêm mới khách sạn</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <?php
+        if (!empty($this->view['msg'])) {
+            echo '<pre>';
+            echo $this->view['msg'];
+            echo '</pre>';
+        }
+        ?>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="text">Tên khách sạn</label>
+                        <input class="form-control" type="text" name="txt_ten_ks">
+                        <label for="text">Mô tả</label>
+                        <textarea rows="10" class="form-control" id="noi_dung_ks" name="txt_mo_ta"></textarea>
+                        <label for="text">Thông tin khách sạn</label>
+                        <textarea rows="10" class="form-control" id="thong_tin" name="txt_thong_tin"></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="text">Địa chỉ</label>
+                        <input class="form-control" type="text" name="txt_dia_chi">
+                        <label for="text">Số điện thoại</label>
+                        <input class="form-control" type="text" name="txt_dien_thoai">
+                        <label for="text">Email</label>
+                        <input class="form-control" type="email" name="txt_email">
+                        <label for="text">Tài khoản quản lý</label>
+                        <select class="form-control" name="txt_tai_khoan" id="">
+                            <option value="0">--Tài khoản--</option>
+                        <?php foreach ($this->view['list-user'] as $value) { ?>
+                            <option value="<?php echo $value['id']; ?>">
+                        <?php echo $value['ten_dang_nhap']; ?></option>
+                                                <?php } ?>
+                        </select>
+                        <label for="text">Hình Ảnh</label>
+                        <input class="form-control" type="file" name="txt_hinh_anh[]" accept=".png,.jpg,.jpeg,.gif" multiple="multiple">
+                    </div>
+                </div>
+
+            </div>
+            <input type="submit" value="Thêm mới" class="btn btn-info" name="btnSave">
+        </form>
+
+    </div>
+    <!-- /.box-body -->
+</div>

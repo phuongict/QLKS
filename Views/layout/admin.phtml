@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Panel</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="<?php echo template_url; ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo template_url; ?>bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo template_url; ?>bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="<?php echo template_url; ?>css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<?php echo template_url; ?>css/skins/skin-blue.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<?php if(!isset($_SESSION['userLogin'])){
+    echo "<script type='text/javascript'>window.location.href='?controller=index&action=login';</script>";
+}
+     ?>
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>C</b>P</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Controll</b> Panel</span>
+        </a>
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="?controller=index&action=logout">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="<?php echo template_url; ?>images/ava2.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p><?php echo @$_SESSION['userLogin']['ten_dang_nhap']; ?></p>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+
+            <!-- search form (Optional) -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">Quản lý khách sạn</li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Khách sạn</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="?controller=admin-hotel&action=add">Thêm khách sạn</a></li>
+                        <li><a href="?controller=admin-hotel&action=list">Danh sách khách sạn</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Phòng</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#">Thêm phòng</a></li>
+                        <li><a href="?controller=admin-room&action=list">Danh sách phòng</a></li>
+                    </ul>
+                </li>
+                <li><a href="?controller=admin-room&action=list-order"><i class="fa fa-link"></i> <span>Danh sách đặt phòng</span></a></li>
+                <li class="header">Quản lý bài viết</li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Danh mục bài viết</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#">Thêm danh mục</a></li>
+                        <li><a href="?controller=admin-article&action=list-category">Danh sách danh mục</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Bài viết</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#">Thêm bài viết</a></li>
+                        <li><a href="?controller=admin-article&action=list">Danh sách bài viết</a></li>
+                    </ul>
+                </li>
+                <li class="header">Quản lý tài khoản</li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Nhóm tài khoản</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#">Thêm nhóm tài khoản</a></li>
+                        <li><a href="?controller=admin-user&action=list-group">Danh sách nhóm tài khoản</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Tài khoản</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#">Thêm tài khoản</a></li>
+                        <li><a href="?controller=admin-user&action=list">Danh sách tài khoản</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Chức năng</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#">Thêm chức năng</a></li>
+                        <li><a href="?controller=admin-user&action=list-func">Danh chức năng</a></li>
+                    </ul>
+                </li>
+                <li class="header">Quản lý liên hệ</li>
+                <li><a href="?controller=admin-contact&action=list"><i class="fa fa-link"></i> <span>Danh sách liên hệ</span></a></li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <?php
+                        $this->showContent();
+                        ?>
+                        <!-- /.box-footer -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+            IT-PLUS
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2017 <a href="#">PPIT</a>.</strong> All rights reserved.
+    </footer>
+</div>
+<script src="<?php echo template_url; ?>bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo template_url; ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo template_url; ?>js/adminlte.min.js"></script>
+<script src="<?php echo template_url; ?>ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'noi_dung_ks' );
+    CKEDITOR.replace( 'thong_tin' );
+</script>
+</body>
+</html>
