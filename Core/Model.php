@@ -10,10 +10,9 @@ abstract class Model{
     public function __construct()
     {
         if(empty($this->conn)){
-            require_once app_path.'/Config/connect_db.php';
-            $this->conn = $GLOBALS['conn'];
-//            $this->conn = $conn;
-            unset($GLOBALS['conn']);
+            $conn = null;
+            require app_path.'/Config/connect_db.php';
+            $this->conn = $conn;
         }
     }
     public function countRecord($table){

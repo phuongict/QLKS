@@ -12,18 +12,14 @@
         }
         ?>
         <form action="" method="post" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-sm-6">
                     <div class="form-group">
                         <label for="text">Tên khách sạn</label>
                         <input class="form-control" type="text" name="txt_ten_ks">
                         <label for="text">Mô tả</label>
-                        <textarea rows="10" class="form-control" id="noi_dung_ks" name="txt_mo_ta"></textarea>
+                        <textarea rows="10" class="form-control" id="content" name="txt_mo_ta"></textarea>
                         <label for="text">Thông tin khách sạn</label>
-                        <textarea rows="10" class="form-control" id="thong_tin" name="txt_thong_tin"></textarea>
+                        <textarea rows="10" class="form-control" id="content2" name="txt_thong_tin"></textarea>
                     </div>
-                </div>
-                <div class="col-sm-6">
                     <div class="form-group">
                         <label for="text">Địa chỉ</label>
                         <input class="form-control" type="text" name="txt_dia_chi">
@@ -42,12 +38,34 @@
                         <label for="text">Hình Ảnh</label>
                         <input class="form-control" type="file" name="txt_hinh_anh[]" accept=".png,.jpg,.jpeg,.gif" multiple="multiple">
                     </div>
-                </div>
-
-            </div>
             <input type="submit" value="Thêm mới" class="btn btn-info" name="btnSave">
         </form>
 
     </div>
     <!-- /.box-body -->
 </div>
+<script src="<?php echo template_url; ?>ckeditor/ckeditor/ckeditor.js"></script>
+<script>
+    //    CKEDITOR.replace( 'noi_dung_ks' );
+    //    CKEDITOR.replace( 'thong_tin' );
+    CKEDITOR.replace("content",{
+        toolbar: [
+            { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
+            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+            { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
+            { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+            { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+        ],
+        extraPlugins: "tableresize"
+    });
+    CKEDITOR.replace("content2",{
+        toolbar: [
+            { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
+            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+            { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
+            { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+            { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+        ],
+        extraPlugins: "tableresize"
+    });
+</script>

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?php echo template_url; ?>css/skins/skin-blue.min.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script src="<?php echo template_url; ?>bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <?php if(!isset($_SESSION['userLogin'])){
@@ -195,13 +196,10 @@
         <strong>Copyright &copy; 2017 <a href="#">PPIT</a>.</strong> All rights reserved.
     </footer>
 </div>
-<script src="<?php echo template_url; ?>bower_components/jquery/dist/jquery.min.js"></script>
+
 <script src="<?php echo template_url; ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="<?php echo template_url; ?>js/adminlte.min.js"></script>
-<script src="<?php echo template_url; ?>ckeditor/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace( 'noi_dung_ks' );
-    CKEDITOR.replace( 'thong_tin' );
-</script>
+
+
 </body>
 </html>

@@ -87,12 +87,13 @@ class  Controller{
             }
         }
         //chuyển file vào mục
+
         for($i=0;$i<count($file_type);$i++){
             if (!file_exists(template_url.'images/img-hotel'))//kiểm tra và tạo thư mục hinh-anh
             {
                 mkdir(template_url.'images/img-hotel');
             }
-            move_uploaded_file($file_tmp[$i], template_url.'images/img-hotel'.$file_name[$i]);
+            move_uploaded_file($file_tmp[$i], template_url.'images/img-hotel/'.$file_name[$i]);
         }
 //        return $name_img = implode(' ',$file_name);
         return serialize($file_name);
