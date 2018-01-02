@@ -13,13 +13,15 @@
                             <th>Địa chỉ</th>
                             <th>Số điện thoại</th>
                             <th>Email</th>
-                            <th>Mô tả</th>
-                            <th>Thông tin</th>
+<!--                            <th>Mô tả</th>-->
+<!--                            <th>Thông tin</th>-->
                             <th>Tài khoản</th>
+                            <th colspan="3"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
+
                         $stt = 0;
                         foreach($this->view['list'] as $data){
                             $stt +=1;
@@ -31,13 +33,64 @@
                                 <td><?php echo $data['dia_chi']; ?></td>
                                 <td><?php echo $data['so_dien_thoai'] ?></td>
                                 <td><?php echo $data['email'] ?></td>
-                                <td><?php echo $data['mo_ta'] ?></td>
-                                <td><?php echo $data['thong_tin'] ?></td>
+<!--                                <td>--><?php //echo $data['mo_ta'] ?><!--</td>-->
+<!--                                <td>--><?php //echo $data['thong_tin'] ?><!--</td>-->
                                 <td><?php echo $data['ten_dang_nhap'] ?></td>
+                                <td align="center"><a href="?controller=admin-hotel&action=edit&id=<?php echo $data['id']; ?>" title="Sửa"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                <td align="center"><a href="?controller=admin-hotel&action=delete&id=<?php echo $data['id']; ?>" title="Xóa"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                <td align="center"><a href="#" title="Xem chi tiết"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                             </tr>
                         <?php } ?>
                         </tbody>
-                    </table></div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Tổng số: <?php echo count($this->view['list'])?> bản ghi</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
+                    </table></div></div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Tổng số: <?php echo count($this->view['list'])?> bản ghi</div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                        <?php
+                        if ($this->view['total_pages'] > 1) {
+                            $previous = isset($_GET['page']) ? $_GET['page'] - 1 : 1;
+                            $next     = isset($_GET['page']) ? $_GET['page'] + 1 : 2;
+                            if (@$_GET['page'] == 1 || !isset($_GET['page'])) {
+                                $disabled1 = 'disabled';
+                            } else {
+                                $disabled1 = '';
+                            }
+                            if (@$_GET['page'] == $this->view['total_pages']) {
+                                $disabled2 = 'disabled';
+                            } else {
+                                $disabled2 = '';
+                            }
+                            ?>
+                            <ul class="pagination">
+                                <li class="paginate_button previous <?php echo $disabled1; ?>" id="example2_previous">
+                                    <a class="page-link"
+                                       href="?controller=admin-hotel&action=list&page=<?php echo $previous; ?>">Trước</a>
+                                </li>
+                                <?php
+                                for ($page = 1; $page <= $this->view['total_pages']; $page++) {
+                                    if (@$_GET['page'] == $page) {
+                                        $active = 'active';
+                                    } else {
+                                        $active = '';
+                                    }
+                                    echo '<li class="paginate_button ' . $active . '"><a class="page-link" href="?controller=admin-hotel&action=list&page=' . $page . '">' . $page . '</a></li>';
+                                }
+                                ?>
+                                <li class="paginate_button <?php echo $disabled2; ?>" id="example2_next">
+                                    <a class="page-link"
+                                       href="?controller=admin-hotel&action=list&page=<?php echo $next; ?>">Sau</a>
+                                </li>
+                            </ul>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+           </div>
     </div>
     <!-- /.box-body -->
 </div>

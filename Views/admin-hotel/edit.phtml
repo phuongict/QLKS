@@ -1,7 +1,86 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: phamp
- * Date: 24/12/2017
- * Time: 16:02
- */
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Sửa khách sạn</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <?php
+        if (!empty($this->view['msg'])) {
+            echo '<pre>';
+            foreach ($this->view['msg'] as $msg){
+                echo $msg.'<br>';
+            }
+            echo '</pre>';
+        }
+        if(!empty($this->view['data'])){
+            $data = $this->view['data'];
+
+        ?>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="text">Tên khách sạn</label>
+                <input class="form-control" type="text" name="txt_ten_ks" value="<?php echo $data['ten_khach_san']; ?>">
+                <label for="text">Mô tả</label>
+                <textarea rows="10" class="form-control" id="content" name="txt_mo_ta"><?php echo $data['mo_ta']; ?></textarea>
+                <label for="text">Thông tin khách sạn</label>
+                <textarea rows="10" class="form-control" id="content2" name="txt_thong_tin"><?php echo $data['thong_tin']; ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="text">Địa chỉ</label>
+                <input class="form-control" type="text" name="txt_dia_chi" value="<?php echo $data['dia_chi']; ?>">
+                <label for="text">Số điện thoại</label>
+                <input class="form-control" type="text" name="txt_dien_thoai" value="<?php echo $data['so_dien_thoai']; ?>">
+                <label for="text">Email</label>
+                <input class="form-control" type="email" name="txt_email" value="<?php echo $data['email']; ?>">
+                <label for="text">Tài khoản quản lý</label>
+                <select class="form-control" name="txt_tai_khoan" id="">
+                    <option  value="<?php echo $data['id_tai_khoan']; ?>"><?php echo $data['ten_dang_nhap']; ?></option>
+                    <?php foreach ($this->view['list-user'] as $value) { ?>
+                        <option value="<?php echo $value['id']; ?>">
+                            <?php echo $value['ten_dang_nhap']; ?></option>
+                    <?php } ?>
+                </select>
+                <label for="text">Hình Ảnh</label>
+                <div class="row">
+                    <?php
+            $hinh_anh = unserialize($data['hinh_anh']);
+            foreach ($hinh_anh as $value){ ?>
+                    <div class="col-sm-3">
+                        <img style="width:100%;" src="<?php echo template_url.'images/img-hotel/'.$value; ?>"/>
+                    </div>
+                    <?php } ?>
+                </div>
+                <br><input class="form-control" type="file" name="txt_hinh_anh[]" accept=".png,.jpg,.jpeg,.gif" multiple="multiple">
+            </div>
+            <input type="submit" value="Cập nhật" class="btn btn-info" name="btnSave">
+        </form>
+        <?php } ?>
+
+    </div>
+    <!-- /.box-body -->
+</div>
+<script src="<?php echo template_url; ?>ckeditor/ckeditor/ckeditor.js"></script>
+<script>
+    //    CKEDITOR.replace( 'noi_dung_ks' );
+    //    CKEDITOR.replace( 'thong_tin' );
+    CKEDITOR.replace("content",{
+        toolbar: [
+            { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
+            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+            { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
+            { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+            { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+        ],
+        extraPlugins: "tableresize"
+    });
+    CKEDITOR.replace("content2",{
+        toolbar: [
+            { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
+            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+            { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
+            { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+            { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+        ],
+        extraPlugins: "tableresize"
+    });
+</script>

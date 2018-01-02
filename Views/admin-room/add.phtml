@@ -1,7 +1,79 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: phamp
- * Date: 24/12/2017
- * Time: 16:00
- */
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Thêm mới phong</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <?php
+        if (!empty($this->view['msg'])) {
+            echo '<pre>';
+            echo $this->view['msg'];
+            echo '</pre>';
+        }
+        ?>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="text">Tên phòng</label>
+                <input class="form-control" type="text" name="txt_ten_phong">
+                <label for="text">Mô tả</label>
+                <textarea rows="10" class="form-control" id="content" name="txt_mo_ta"></textarea>
+                <label for="text">Thiết bị</label>
+                <textarea rows="10" class="form-control" id="content2" name="txt_thiet_bi"></textarea>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="text">Số giường</label>
+                        <input class="form-control" type="number" name="txt_so_giuong">
+                        <label for="text">Số người</label>
+                        <input class="form-control" type="number" name="txt_so_nguoi">
+                        <label for="text">Diện tích</label>
+                        <input class="form-control" type="text" name="txt_dien_tich">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="text">Giá</label>
+                        <input class="form-control" type="text" name="txt_gia">
+                        <label for="text">Giá khuyến mại</label>
+                        <input class="form-control" type="text" name="txt_gia_km">
+                        <label for="text">Khách sạn</label>
+                        <select class="form-control" name="txt_khach_san" id="">
+                            <option value="0">--Khách sạn--</option>
+                            <?php foreach ($this->view['list-hotel'] as $value) { ?>
+                                <option value="<?php echo $value['id']; ?>">
+                                    <?php echo $value['ten_khach_san']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <label for="text">Hình Ảnh</label>
+                <input class="form-control" type="file" name="txt_hinh_anh[]" accept=".png,.jpg,.jpeg,.gif" multiple="multiple">
+            </div>
+            <input type="submit" value="Thêm mới" class="btn btn-info" name="btnSave">
+        </form>
+
+    </div>
+    <!-- /.box-body -->
+</div>
+<script src="<?php echo template_url; ?>ckeditor/ckeditor/ckeditor.js"></script>
+<script>
+    //    CKEDITOR.replace( 'noi_dung_ks' );
+    //    CKEDITOR.replace( 'thong_tin' );
+    CKEDITOR.replace("content",{
+        toolbar: [
+            { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
+            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+            { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
+            { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+            { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+        ],
+        extraPlugins: "tableresize"
+    });
+    CKEDITOR.replace("content2",{
+        toolbar: [
+            { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
+            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+            { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
+            { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+            { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+        ],
+        extraPlugins: "tableresize"
+    });
+</script>

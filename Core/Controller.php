@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by sonmobi@gmail.com
- * Date: 12/3/2017
- * Time: 11:19 PM
- */
 class  Controller{
     protected $view = array();
     protected $layout = array();
@@ -39,10 +34,12 @@ class  Controller{
         }
     }
     public function Pagination($total_records){
+        $pagination = array();
         if(!is_numeric($total_records)){
             return false;
         }
         $total_pages = ceil($total_records/_admin_page_limit);
+        $pagination['total_pages'] = $total_pages;
         if($total_pages<1){
             return false;
         }
@@ -51,7 +48,8 @@ class  Controller{
             $current_page = 1;
         if ($current_page > $total_pages)
             $current_page = $total_pages;
-        return  $this->offset =  ($current_page - 1) * _admin_page_limit;
+        $pagination['offset'] =  $this->offset =  ($current_page - 1) * _admin_page_limit;
+        return $pagination;
     }
 
     public function validateUsername ($string){
@@ -61,7 +59,7 @@ class  Controller{
         }
         return true;
     }
-    public function getNameImg(){
+    public function getNameImg($name){
         $file_uploaded = $_FILES['txt_hinh_anh'];
         $file_type = array();
         $file_tmp = array();
@@ -89,11 +87,11 @@ class  Controller{
         //chuyển file vào mục
 
         for($i=0;$i<count($file_type);$i++){
-            if (!file_exists(template_url.'images/img-hotel'))//kiểm tra và tạo thư mục hinh-anh
+            if (!file_exists(template_url.'images/'.$name))//kiểm tra và tạo thư mục hinh-anh
             {
-                mkdir(template_url.'images/img-hotel');
+                mkdir(template_url.'images/'.$name);
             }
-            move_uploaded_file($file_tmp[$i], template_url.'images/img-hotel/'.$file_name[$i]);
+            move_uploaded_file($file_tmp[$i], template_url.'images/'.$name.'/'.$file_name[$i]);
         }
 //        return $name_img = implode(' ',$file_name);
         return serialize($file_name);
