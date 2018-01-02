@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 25, 2017 lúc 04:24 PM
+-- Thời gian đã tạo: Th1 02, 2018 lúc 12:00 PM
 -- Phiên bản máy phục vụ: 10.1.25-MariaDB
 -- Phiên bản PHP: 5.6.31
 
@@ -32,17 +32,19 @@ CREATE TABLE `baiviet` (
   `id` int(11) NOT NULL,
   `tieu_de` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `noi_dung` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `ngay_dang` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ngay_dang` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `hinh_anh` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `id_danh_muc` int(11) NOT NULL
+  `id_danh_muc` int(11) NOT NULL,
+  `ngay_cap_nhat` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `id_tai_khoan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `baiviet`
 --
 
-INSERT INTO `baiviet` (`id`, `tieu_de`, `noi_dung`, `ngay_dang`, `hinh_anh`, `id_danh_muc`) VALUES
-(1, 'Đây là bài viết thử nghiệm', 'nội dung bài viết', '2017-12-24 06:32:03', '', 1);
+INSERT INTO `baiviet` (`id`, `tieu_de`, `noi_dung`, `ngay_dang`, `hinh_anh`, `id_danh_muc`, `ngay_cap_nhat`, `id_tai_khoan`) VALUES
+(6, 'sdasdas', '<p>đ&acirc;s</p>\r\n', '2017-12-30 04:26:07', 'a:1:{i:0;s:50:\"25552304_271848566677737_3687025192655770253_n.jpg\";}', 1, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -137,7 +139,7 @@ CREATE TABLE `khachsan` (
   `mo_ta` text COLLATE utf8_unicode_ci NOT NULL,
   `thong_tin` text COLLATE utf8_unicode_ci NOT NULL,
   `id_tai_khoan` int(11) NOT NULL,
-  `hinh_anh` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `hinh_anh` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -145,7 +147,8 @@ CREATE TABLE `khachsan` (
 --
 
 INSERT INTO `khachsan` (`id`, `ten_khach_san`, `dia_chi`, `so_dien_thoai`, `email`, `mo_ta`, `thong_tin`, `id_tai_khoan`, `hinh_anh`) VALUES
-(1, 'Hanoi Emotion Hotel', 'Hà nội', '09812345664', 'shbasd@hjd.vn', 'sdagsduasbdadasds', 'sfafsafasfasfasfsa', 1, '');
+(1, 'Hanoi Emotion Hotelâsaac', 'Hà nội2', '0981234566', 'shbasd@hjd.vnd', '<p>sdagsduasbdadasdsada&aacute;daa222222222222a</p>\r\n', '<p>sfafsafasfasfasfsa</p>\r\n', 4, 0x613a333a7b693a303b733a35313a2232353434363037345f313539353639383336303532373039335f323837333334373537373935363430373830305f6e2e6a7067223b693a313b733a35303a2232353535323330345f3237313834383536363637373733375f333638373032353139323635353737303235335f6e2e6a7067223b693a323b733a373a2276636c2e6a7067223b7d),
+(2, 'âsdasdasdas', 'sadas', 'sadasdas', 'aa@fm.comss', '<p>đasadasd</p>\r\n', '<p>sadsad</p>\r\n', 16, 0x613a323a7b693a303b733a35313a2232353434363037345f313539353639383336303532373039335f323837333334373537373935363430373830305f6e2e6a7067223b693a313b733a35303a2232353535323330345f3237313834383536363637373733375f333638373032353139323635353737303235335f6e2e6a7067223b7d);
 
 -- --------------------------------------------------------
 
@@ -206,15 +209,21 @@ CREATE TABLE `phong` (
   `giam_gia` double DEFAULT NULL,
   `trang_thai` bit(1) DEFAULT b'0',
   `id_khach_san` int(11) NOT NULL,
-  `trang_thai_dang` bit(1) DEFAULT b'0'
+  `trang_thai_dang` bit(1) DEFAULT b'0',
+  `so_giuong` int(11) NOT NULL,
+  `hinh_anh` blob NOT NULL,
+  `so_nguoi` int(11) NOT NULL,
+  `dien_tich` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `thiet_bi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `mo_ta` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `phong`
 --
 
-INSERT INTO `phong` (`id`, `ten_phong`, `gia`, `giam_gia`, `trang_thai`, `id_khach_san`, `trang_thai_dang`) VALUES
-(1, 'Phòng 01', 2000000, 1500000, b'0', 1, b'0');
+INSERT INTO `phong` (`id`, `ten_phong`, `gia`, `giam_gia`, `trang_thai`, `id_khach_san`, `trang_thai_dang`, `so_giuong`, `hinh_anh`, `so_nguoi`, `dien_tich`, `thiet_bi`, `mo_ta`) VALUES
+(1, 'Phòng 01', 2000000, 1500000, b'0', 1, b'0', 0, '', 0, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -256,7 +265,15 @@ INSERT INTO `taikhoan` (`id`, `ten_dang_nhap`, `mat_khau`, `email`, `so_dien_tho
 (1, 'administration', '123456', 'phamphuong.svit@gmail.com', '0981914596', 'moc chau', b'1', 0, 1, 'Phạm Văn', 'Phương'),
 (2, 'nhanvien', '123456', 'nguyan@dsnjfnsd.vn', '091273239', 'kdsbfksdfsdn', b'1', 0, 4, 'djkhfsnsnf', 'kjfgkdskb'),
 (3, 'test', '123456', 'abc@gmail.com', '0954312345', 'sadsad', b'0', 0, 4, 'sad', 'sadsad'),
-(4, 'test2', 'sadsadsa', 'abcdef@gmail.com', 'sadsda', 'sadsad', b'0', 0, 4, 'sdas', 'dsad');
+(4, 'test2', 'sadsadsa', 'abcdef@gmail.com', 'sadsda', 'sadsad', b'0', 0, 4, 'sdas', 'dsad'),
+(5, 'sdsadsada', 'đasadasdasdasd', 'sdasda', 'sdasd', 'ád', NULL, 0, 4, '', ''),
+(6, 'ádasdas', 'ádad', '', '', '', NULL, 0, 4, '', ''),
+(9, 'sadasdádasd', 'sadadada', 'ádasd', 'da', 'đâ', b'0', 0, 4, '', ''),
+(12, 'aaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaa', 'ádas', 'adad', 'dấd', b'1', 0, 4, '', ''),
+(13, 'aaaaaaaaaaaaaa', 'aaaaaaaaaaa', 'aaaaaaaaaaaaaa', 'aaaaaaaaaaaaa', 'aaaaaaaa', NULL, 0, 4, '', ''),
+(15, 'assssssssssss', 'ssssssssssssss', 'sssssssssssss', 'ssssssss', '', NULL, 0, 4, '', ''),
+(16, 'sssssssssss', 'ssssssssssssss', 'ssssssssss', 'ssssss', 'ssssssssssssssssssssss', NULL, 0, 4, '', ''),
+(18, 'dddddđ', 'ddd', 'dddddđ', 'ddddddd', '', NULL, 0, 4, '', '');
 
 -- --------------------------------------------------------
 
@@ -287,7 +304,8 @@ CREATE TABLE `uudai` (
 ALTER TABLE `baiviet`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `tieu_de` (`tieu_de`),
-  ADD KEY `id_danh_muc` (`id_danh_muc`);
+  ADD KEY `id_danh_muc` (`id_danh_muc`),
+  ADD KEY `id_tai_khoan` (`id_tai_khoan`);
 
 --
 -- Chỉ mục cho bảng `chucnang`
@@ -383,7 +401,7 @@ ALTER TABLE `uudai`
 -- AUTO_INCREMENT cho bảng `baiviet`
 --
 ALTER TABLE `baiviet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT cho bảng `chucnang`
 --
@@ -408,7 +426,7 @@ ALTER TABLE `dondatphong`
 -- AUTO_INCREMENT cho bảng `khachsan`
 --
 ALTER TABLE `khachsan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `lienhe`
 --
@@ -428,7 +446,7 @@ ALTER TABLE `phong`
 -- AUTO_INCREMENT cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT cho bảng `uudai`
 --
@@ -442,7 +460,8 @@ ALTER TABLE `uudai`
 -- Các ràng buộc cho bảng `baiviet`
 --
 ALTER TABLE `baiviet`
-  ADD CONSTRAINT `baiviet_ibfk_1` FOREIGN KEY (`id_danh_muc`) REFERENCES `danhmucbaiviet` (`id`);
+  ADD CONSTRAINT `baiviet_ibfk_1` FOREIGN KEY (`id_danh_muc`) REFERENCES `danhmucbaiviet` (`id`),
+  ADD CONSTRAINT `baiviet_ibfk_2` FOREIGN KEY (`id_tai_khoan`) REFERENCES `taikhoan` (`id`);
 
 --
 -- Các ràng buộc cho bảng `dichvu`
