@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 02, 2018 lúc 12:00 PM
+-- Thời gian đã tạo: Th1 04, 2018 lúc 11:53 PM
 -- Phiên bản máy phục vụ: 10.1.25-MariaDB
 -- Phiên bản PHP: 5.6.31
 
@@ -83,7 +83,8 @@ CREATE TABLE `danhmucbaiviet` (
 --
 
 INSERT INTO `danhmucbaiviet` (`id`, `ten_danh_muc`, `mo_ta`, `hinh_anh`) VALUES
-(1, 'du lịch', 'danh mục về du lịch', 'https://cdn3.ivivu.com/2015/10/du-lich-moc-chau-ivivu.com-3.jpg');
+(1, 'du lịch', 'danh mục về du lịch', 'https://cdn3.ivivu.com/2015/10/du-lich-moc-chau-ivivu.com-3.jpg'),
+(3, 'test 0233', 'sdcbnacasđ', 'a:1:{i:0;s:51:\"25446074_1595698360527093_2873347577956407800_n.jpg\";}');
 
 -- --------------------------------------------------------
 
@@ -411,7 +412,7 @@ ALTER TABLE `chucnang`
 -- AUTO_INCREMENT cho bảng `danhmucbaiviet`
 --
 ALTER TABLE `danhmucbaiviet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT cho bảng `dichvu`
 --
