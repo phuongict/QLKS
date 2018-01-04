@@ -1,0 +1,36 @@
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Sửa danh mục: <?php echo @$this->view['data']['ten_danh_muc'] ?></h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <?php
+        if (!empty($this->view['msg'])) {
+            echo '<pre>';
+            foreach ($this->view['msg'] as $msg){
+                echo $msg.'<br>';
+            }
+            echo '</pre>';
+        }
+        if(!empty($this->view['data'])){
+            $data = $this->view['data'];
+            ?>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="text">Tên danh mục</label>
+                    <input class="form-control" type="text" name="txt_ten_danh_muc" value="<?php echo $data['ten_danh_muc'] ?>">
+                    <label for="text">Mô tả</label>
+                    <textarea rows="10" class="form-control" id="content2" name="txt_mo_ta"><?php echo $data['mo_ta'] ?></textarea>
+                    <label for="text">Hình Ảnh Hiển Thị</label><br>
+                    <?php $hinh_anh = unserialize($data['hinh_anh']);?>
+                    <img style="width:200px;" src="<?php echo template_url.'images/img-category/'.$hinh_anh[0]; ?>"/>
+                    <br>
+                    <input class="form-control" type="file" name="txt_hinh_anh[]" accept=".png,.jpg,.jpeg,.gif"
+                           multiple="multiple">
+                </div>
+                <input type="submit" value="Cập nhật" class="btn btn-info" name="btnSave">
+            </form>
+        <?php } ?>
+    </div>
+    <!-- /.box-body -->
+</div>

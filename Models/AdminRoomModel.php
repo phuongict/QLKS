@@ -94,6 +94,33 @@ class AdminRoomModel extends Model {
         return $row;
         mysqli_free_result($res);
     }
+    public function loadOneOrder($id)
+    {
+        // TODO: Implement loadOne() method.
+        $sql = "select trang_thai,id_phong from dondatphong where id = $id";
+        $res = mysqli_query($this->conn, $sql);
+        if($res === false){
+            return 'Lỗi truy vấn: '.mysqli_error($this->conn);
+        }
+        $row = mysqli_fetch_assoc($res);
+        if($row == null){
+            return 'Không tìm thấy bản ghi nào';
+        }
+        return $row;
+        mysqli_free_result($res);
+    }
+    public function updateOrder($params = null){
+        $trang_thai = $params['trang_thai'];
+        $id = $params['id'];
+        $sql = "update dondatphong set trang_thai = '$trang_thai' where id = $id";
+        $res = mysqli_query($this->conn,$sql);
+        if($res === false){
+            return "Lỗi Update: ". mysqli_error($this->conn);
+        }
+        else {
+            return true;
+        }
+    }
     public function update($params = null){
         $ten = addslashes($params['ten_phong']);
         $mo_ta = addslashes($params['mo_ta']);

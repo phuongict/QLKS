@@ -36,27 +36,9 @@
                 <input class="form-control" type="file" name="txt_hinh_anh[]" accept=".png,.jpg,.jpeg,.gif"
                        multiple="multiple">
             </div>
-            <input type="submit" value="Thêm mới" class="btn btn-info" name="btnSave">
+            <input type="submit" value="Cập nhật" class="btn btn-info" name="btnSave">
         </form>
 <?php } ?>
     </div>
     <!-- /.box-body -->
 </div>
-<script src="<?php echo template_url; ?>ckeditor/ckeditor/ckeditor.js"></script>
-<script>
-    //    CKEDITOR.replace( 'noi_dung_ks' );
-    //    CKEDITOR.replace( 'thong_tin' );
-    CKEDITOR.replace("content2", {
-        toolbar: [
-            {name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']},
-            {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
-            {
-                name: 'insert',
-                items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']
-            },
-            {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']},
-            {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
-        ],
-        extraPlugins: "tableresize"
-    });
-</script>

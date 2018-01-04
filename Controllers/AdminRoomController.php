@@ -112,7 +112,38 @@ class AdminRoomController extends Controller
         $this->view['list']        = $list;
         $this->view['total_pages'] = $pagination['total_pages'];
     }
-
+// đơn hàng
+    public function editOrderAction()
+    {
+        $loadOne = new AdminRoomModel();
+        $anh     = null;
+        if (!empty($_GET['id'])) {
+            $id = $_GET['id'];
+            if (!is_numeric($id)) {
+                return $this->view['msg'][] = "ID đơn đặt phòng không đúng";
+            }
+            $res = $loadOne->loadOneOrder($id);
+            if (is_array($res)) {
+                $this->view['data'] = $res;
+            } else {
+                return $this->view['msg'][] = $res;
+            }
+            //update
+            if (isset($_POST['btnSave'])) {
+                $data              = array();
+                $data['id'] = $id;
+                $data['trang_thai'] = $_POST['txt_trang_thai'];
+                $res2 = $loadOne->updateOrder($data);
+                if ($res2 === true) {
+                    $this->view['msg'][]                 = "Cập nhật trạng thái đơn đặt phòng thành công!";
+                    $this->view['data']['trang_thai'] = $data['trang_thai'];
+                } else
+                    $this->view['msg'][] = $res2;
+            }
+        } else {
+            $this->view['msg'][] = "Không tìm thấy id đơn đặt phòng";
+        }
+    }
     public function listOrderAction()
     {
         $orderModel    = new AdminRoomModel();
@@ -164,6 +195,9 @@ class AdminRoomController extends Controller
             $this->view['flag'] = true;
             return $this->view;
         }
+    }
+    public function deleteOrderAction(){
+
     }
 
 }

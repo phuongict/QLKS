@@ -1,7 +1,30 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: phamp
- * Date: 24/12/2017
- * Time: 16:03
- */
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Xóa bài viết: <?php echo @$this->view['data']['tieu_de'];?></h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <?php
+        if (!empty($this->view['msg'])) {
+            echo '<pre>';
+            echo $this->view['msg'];
+            echo '</pre>';
+        }
+        if(@$this->view['flag'] === true) {
+            echo '<button class="btn btn-info" type="button" onclick="window.location.href=\'?controller=admin-article&action=list\'">Quay lại danh sách</button>';
+        }
+        else{
+            ?>
+            <div class="alert alert-danger">
+                <strong>Bạn có chắc chắn muốn xóa không?</strong>
+                <form action="" method="post" class="form-inline">
+                    <div class="form-group"></div>
+                    <input type="hidden" name="id_bai_viet" value="<?php echo @$this->view['data']['id']; ?>">
+                    <input class="btn btn-info" type="submit" value="Đồng ý xóa" name="btnDelete">
+                    <button class="btn btn-info" type="button" onclick="history.back(-1)" name="btnBack">Quay lại</button>
+                </form>
+            </div>
+        <?php } ?>
+    </div>
+    <!-- /.box-body -->
+</div>

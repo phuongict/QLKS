@@ -1,0 +1,43 @@
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Sửa trạng thái đơn đặt phòng: <?php echo @$this->view['data']['id_phong'] ?></h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <?php
+        if (!empty($this->view['msg'])) {
+            echo '<pre>';
+            foreach ($this->view['msg'] as $msg){
+                echo $msg.'<br>';
+            }
+            echo '</pre>';
+        }
+        if(!empty($this->view['data'])){
+            $data = $this->view['data'];
+            $trang_thai = 'Không xác định';
+            if($data['trang_thai']==0){
+                $trang_thai = 'Đang chờ';
+            }
+            else
+                if($data['trang_thai']==1)
+                    $trang_thai = 'Đã duyệt';
+            else
+                if($data['trang_thai']==-1)
+                    $trang_thai = 'Đã hủy';
+            ?>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="text">Trạng thái</label>
+                    <select name="txt_trang_thai" id="">
+                        <option value="<?php echo $this->view['data']['trang_thai']; ?>"><?php echo $trang_thai; ?></option>
+                        <option value="0">Đang chờ</option>
+                        <option value="1">Đã duyệt</option>
+                        <option value="-1">Đã hủy</option>
+                    </select>
+                </div>
+                <input type="submit" value="Cập nhật" class="btn btn-info" name="btnSave">
+            </form>
+        <?php } ?>
+    </div>
+    <!-- /.box-body -->
+</div>
